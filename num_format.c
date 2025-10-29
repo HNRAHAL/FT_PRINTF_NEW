@@ -6,7 +6,7 @@
 /*   By: hrahal <hrahal@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 11:52:57 by hrahal            #+#    #+#             */
-/*   Updated: 2025/10/29 12:44:11 by hrahal           ###   ########.fr       */
+/*   Updated: 2025/10/29 14:23:45 by hrahal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,37 +55,14 @@ int	number_case(va_list *list, t_format *flg, int w_nbr, int p_nbr)
 	else if (p_nbr > len && p_nbr != -1)
 		count += number_case_two(flg, c, len, p_nbr);
 	else
-	{
-
-		if(c == 0 && p_nbr == 0)
-		{
-			if(flg->space_flag || flg->plus_flag)
-				count += sign_case(flg, c);
-			else;
-		}
-		else if(c == 0 && p_nbr != -1)
-		{
-			if(flg->space_flag || flg->plus_flag)
-			{
-				count += sign_case(flg, c);
-				count += b_ft_putnbr(c);
-			}
-			else 
-				count += b_ft_putnbr(c);
-		}
-		else
-		{	
-			count += sign_case(flg, c);
-			count += b_ft_putnbr(c);
-		}
-	}
+		count += number_edge_case1(flg, c, p_nbr);
 	return (count);
 }
 
 int	number_case_one(t_format *flg, int c, int p_nbr, int w_nbr)
 {
 	int	count;
-	int len;
+	int	len;
 
 	len = b_num_len(c);
 	count = 0;
@@ -96,32 +73,12 @@ int	number_case_one(t_format *flg, int c, int p_nbr, int w_nbr)
 	if ((flg->plus_flag && flg->minus_flag) || (flg->space_flag
 			&& flg->minus_flag) || (flg->plus_flag && flg->zero_flag)
 		|| (flg->space_flag && flg->zero_flag))
-		count += number_combined_flags(flg, w_nbr, p_nbr,c);
+		count += number_combined_flags(flg, w_nbr, p_nbr, c);
 	else if ((flg->plus_flag) || (flg->minus_flag) || (flg->space_flag)
 		|| (flg->zero_flag && p_nbr == -1))
-			count += number_individual_flags(flg,w_nbr, p_nbr, c);
+		count += number_individual_flags(flg, w_nbr, p_nbr, c);
 	else
-	{
-		if(c == 0 && w_nbr != -1 && p_nbr != -1)
-		{
-			w_nbr += 1;
-			while (w_nbr-- > 0)
-				count += b_ft_putchar(' ');
-		}
-		else if(c == 0 && w_nbr != -1)
-		{
-			while (w_nbr-- > 0)
-				count += b_ft_putchar(' ');
-			count += b_ft_putnbr(c);
-		}
-		else
-		{
-			while (w_nbr-- > 0)
-				count += b_ft_putchar(' ');
-			count += sign_case(flg, c);
-			count += b_ft_putnbr(c);
-		}
-	}
+		count += number_edge_case2(flg, c, w_nbr, p_nbr);
 	return (count);
 }
 

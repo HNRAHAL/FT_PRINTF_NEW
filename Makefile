@@ -9,21 +9,26 @@ SRCS = ft_printf.c\
 
 BONUS = ft_printf_bonus.c\
 		c_and_s_format.c\
+		c_and_s_helper_one.c\
 		str_functions.c\
 		num_format.c\
 		num_functions.c\
 		num_helper_one.c\
 		num_helper_two.c\
+		num_helper_three.c\
 		u_num_format.c\
+		u_num_helper.c\
 		new_hex_functions.c\
 		p_address_format.c\
 		p_address_helper_one.c\
 		x_hex_lower_format.c\
 		x_hex_lower_helper_one.c\
 		x_hex_lower_helper_two.c\
+		x_hex_lower_helper_three.c\
 		x_hex_upper_format.c\
 		x_hex_upper_helper_one.c\
 		x_hex_upper_helper_two.c\
+		x_hex_upper_helper_three.c\
 		percent_case.c
 
 OBJS = $(SRCS:.c=.o)

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrahal <hrahal@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/26 12:36:27 by hrahal            #+#    #+#             */
-/*   Updated: 2025/10/26 12:36:49 by hrahal           ###   ########.fr       */
+/*   Created: 2025/10/29 17:05:00 by hrahal            #+#    #+#             */
+/*   Updated: 2025/10/29 17:20:20 by hrahal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,23 @@ int	upper_zero_case2(t_format *flg, int w_nbr, int p_nbr)
 	return (count);
 }
 
+int	x_upper_edge_case7(char *str, int w_nbr, int p_nbr)
+{
+	int	count;
+	int	len;
+
+	count = 0;
+	len = b_ft_strlen(str);
+	count += b_ft_putstr("0X");
+	while (p_nbr-- > 0)
+		count += b_ft_putchar('0');
+	while (len-- > 0)
+		count += write(1, &str[len], 1);
+	while (w_nbr-- > 0)
+		count += b_ft_putchar(' ');
+	return (count);
+}
+
 int	x_upper_number_combined_flags2(t_format *flg, char *str, int w_nbr,
 		int p_nbr)
 {
@@ -76,15 +93,7 @@ int	x_upper_number_combined_flags2(t_format *flg, char *str, int w_nbr,
 	count = 0;
 	len = b_ft_strlen(str);
 	if (flg->minus_flag && flg->hash_flag)
-	{
-		count += b_ft_putstr("0X");
-		while (p_nbr-- > 0)
-			count += b_ft_putchar('0');
-		while (len-- > 0)
-			count += write(1, &str[len], 1);
-		while (w_nbr-- > 0)
-			count += b_ft_putchar(' ');
-	}
+		count += x_upper_edge_case7(str, w_nbr, p_nbr);
 	else if (flg->hash_flag)
 	{
 		while (w_nbr-- > 0)

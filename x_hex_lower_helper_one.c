@@ -1,91 +1,123 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   x_hex_lower_helper_one.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hrahal <hrahal@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/29 16:47:46 by hrahal            #+#    #+#             */
+/*   Updated: 2025/10/29 17:23:23 by hrahal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf_bonus.h"
 
-int x_lower_number_else_case(t_format *flg,char *str,int w_nbr,int len)
+int	print_string(char *str, int len)
 {
-    int count;
-    count = 0;
+	int	count;
 
-    w_nbr += 2;
-    if(flg->minus_flag)
-    {
-        while(len-- > 0)
-            count += write(1, &str[len], 1);
-        while(w_nbr-- > 0)
-            count += b_ft_putchar(' ');
-    }
-    else
-    {
-        while(w_nbr-- > 0)
-            count += b_ft_putchar(' ');
-        while(len-- > 0)
-            count += write(1, &str[len], 1);
-    }
-    return count;
+	count = 0;
+	while (len-- > 0)
+		count += write(1, &str[len], 1);
+	return (count);
 }
 
-int lower_zero_case(t_format *flg, int w_nbr)
+int	x_lower_edge_case6(char *str, int w_nbr, int p_nbr)
 {
-    int count;
-    count = 0;
+	int	count;
+	int	len;
 
-    w_nbr -= 1;
-    if(flg->minus_flag)
-    {
-        count += b_ft_putchar('0');
-        while(w_nbr-- > 0)
-            count += b_ft_putchar(' ');
-    }
-    else if(flg->zero_flag)
-    {
-        while(w_nbr-- > 0)
-            count += b_ft_putchar('0');
-        count += b_ft_putchar('0');
-    }
-    else
-    {
-        while(w_nbr-- > 0)
-            count += b_ft_putchar(' ');
-        count += b_ft_putchar('0');
-    }
-    return count;
+	len = b_ft_strlen(str);
+	count = 0;
+	if (p_nbr != -1)
+	{
+		while (w_nbr-- > 0)
+			count += b_ft_putchar(' ');
+		count += b_ft_putstr("0x");
+		while (len-- > 0)
+			count += write(1, &str[len], 1);
+	}
+	else
+	{
+		count += b_ft_putstr("0x");
+		while (w_nbr-- > 0)
+			count += b_ft_putchar('0');
+		while (len-- > 0)
+			count += write(1, &str[len], 1);
+	}
+	return (count);
 }
 
-int x_lower_number_combined_flags(t_format *flg,unsigned int num,int w_nbr,int p_nbr)// i changed here
+int	x_lower_number_else_case(t_format *flg, char *str, int w_nbr, int len)
 {
-    int count, len;
-    char *str;
+	int	count;
 
-    str = b_return_hexvalue_lower(num);
-    len = b_ft_strlen(str);
-    count = 0;
+	count = 0;
+	w_nbr += 2;
+	if (flg->minus_flag)
+	{
+		while (len-- > 0)
+			count += write(1, &str[len], 1);
+		while (w_nbr-- > 0)
+			count += b_ft_putchar(' ');
+	}
+	else
+	{
+		while (w_nbr-- > 0)
+			count += b_ft_putchar(' ');
+		while (len-- > 0)
+			count += write(1, &str[len], 1);
+	}
+	return (count);
+}
 
-    if((flg->minus_flag && flg->hash_flag))
-    {
-        count += b_ft_putstr("0x");
-        while(len-- > 0)
-            count += write(1, &str[len], 1);
-        while(w_nbr-- > 0)
-            count += b_ft_putchar(' ');
-    }
-    else if(flg->zero_flag && flg->hash_flag)
-    {
-        if(p_nbr != -1)
-        {
-            while(w_nbr-- > 0)
-                count += b_ft_putchar(' ');
-            count += b_ft_putstr("0x");
-            while(len-- > 0)
-                count += write(1, &str[len], 1);
-        }
-        else
-        {
-            count += b_ft_putstr("0x");
-            while(w_nbr-- > 0)
-                count += b_ft_putchar('0');	
-            while(len-- > 0)
-                count += write(1, &str[len], 1);
-        }
-    }
-    free(str);
-    return count;
+int	lower_zero_case(t_format *flg, int w_nbr)
+{
+	int	count;
+
+	count = 0;
+	w_nbr -= 1;
+	if (flg->minus_flag)
+	{
+		count += b_ft_putchar('0');
+		while (w_nbr-- > 0)
+			count += b_ft_putchar(' ');
+	}
+	else if (flg->zero_flag)
+	{
+		while (w_nbr-- > 0)
+			count += b_ft_putchar('0');
+		count += b_ft_putchar('0');
+	}
+	else
+	{
+		while (w_nbr-- > 0)
+			count += b_ft_putchar(' ');
+		count += b_ft_putchar('0');
+	}
+	return (count);
+}
+
+int	x_lower_number_combined_flags(t_format *flg, unsigned int num, int w_nbr,
+		int p_nbr)
+{
+	int		count;
+	int		len;
+	char	*str;
+
+	str = b_return_hexvalue_lower(num);
+	len = b_ft_strlen(str);
+	count = 0;
+	if ((flg->minus_flag && flg->hash_flag))
+	{
+		count += b_ft_putstr("0x");
+		while (len-- > 0)
+			count += write(1, &str[len], 1);
+		while (w_nbr-- > 0)
+			count += b_ft_putchar(' ');
+	}
+	else if (flg->zero_flag && flg->hash_flag)
+		count += x_lower_edge_case6(str, w_nbr, p_nbr);
+	free(str);
+	return (count);
 }

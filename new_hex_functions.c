@@ -6,7 +6,7 @@
 /*   By: hrahal <hrahal@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 11:51:08 by hrahal            #+#    #+#             */
-/*   Updated: 2025/10/26 12:53:15 by hrahal           ###   ########.fr       */
+/*   Updated: 2025/10/29 17:27:03 by hrahal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ char	*b_return_address_and_convert_to_hex(void *address)
 	uintptr_t	n_address;
 
 	str = malloc(100);
-	if(!str)
-		return NULL;
+	if (!str)
+		return (NULL);
 	n_address = (uintptr_t)address;
 	i = 0;
 	while (n_address != 0)
