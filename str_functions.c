@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str_functions.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hrahal <hrahal@student.42abudhabi.ae>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/26 12:03:19 by hrahal            #+#    #+#             */
+/*   Updated: 2025/10/28 09:47:26 by hrahal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf_bonus.h"
 
 int	b_ft_putchar(char c)
@@ -5,9 +17,11 @@ int	b_ft_putchar(char c)
 	return (write(1, &c, 1));
 }
 
-int 	b_ft_putstr(char *s)
+int	b_ft_putstr(char *s)
 {
-	int	count, res;
+	int	count;
+	int	res;
+
 	count = 0;
 	res = 0;
 	if (!s)

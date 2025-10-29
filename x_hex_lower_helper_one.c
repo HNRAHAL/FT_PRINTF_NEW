@@ -50,9 +50,13 @@ int lower_zero_case(t_format *flg, int w_nbr)
     return count;
 }
 
-int x_lower_number_combined_flags(t_format *flg,char *str,int w_nbr,int len)
+int x_lower_number_combined_flags(t_format *flg,unsigned int num,int w_nbr,int p_nbr)// i changed here
 {
-    int count;
+    int count, len;
+    char *str;
+
+    str = b_return_hexvalue_lower(num);
+    len = b_ft_strlen(str);
     count = 0;
 
     if((flg->minus_flag && flg->hash_flag))
@@ -65,11 +69,23 @@ int x_lower_number_combined_flags(t_format *flg,char *str,int w_nbr,int len)
     }
     else if(flg->zero_flag && flg->hash_flag)
     {
-        count += b_ft_putstr("0x");
-        while(w_nbr-- > 0)
-            count += b_ft_putchar('0');	
-        while(len-- > 0)
-            count += write(1, &str[len], 1);
+        if(p_nbr != -1)
+        {
+            while(w_nbr-- > 0)
+                count += b_ft_putchar(' ');
+            count += b_ft_putstr("0x");
+            while(len-- > 0)
+                count += write(1, &str[len], 1);
+        }
+        else
+        {
+            count += b_ft_putstr("0x");
+            while(w_nbr-- > 0)
+                count += b_ft_putchar('0');	
+            while(len-- > 0)
+                count += write(1, &str[len], 1);
+        }
     }
+    free(str);
     return count;
 }

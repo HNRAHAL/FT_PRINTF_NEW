@@ -7,21 +7,24 @@ SRCS = ft_printf.c\
 		num_related_functions.c\
 		str_related_functions.c\
 
-BONUS = c_format.c\
-		d_and_i_format.c\
-		new_hex_functions.c\
-		hex_lower_helper_one.c\
-		hex_upper_helper_one.c\
-		num_functions.c\
-		number_helper_one.c\
-		number_helper_two.c\
-		p_format.c\
-		s_format.c\
+BONUS = ft_printf_bonus.c\
+		c_and_s_format.c\
 		str_functions.c\
-		u_format.c\
-		x_lower_format.c\
-		X_upper_format.c\
-		ft_printf_bonus.c
+		num_format.c\
+		num_functions.c\
+		num_helper_one.c\
+		num_helper_two.c\
+		u_num_format.c\
+		new_hex_functions.c\
+		p_address_format.c\
+		p_address_helper_one.c\
+		x_hex_lower_format.c\
+		x_hex_lower_helper_one.c\
+		x_hex_lower_helper_two.c\
+		x_hex_upper_format.c\
+		x_hex_upper_helper_one.c\
+		x_hex_upper_helper_two.c\
+		percent_case.c
 
 OBJS = $(SRCS:.c=.o)
 BONUS_OBJS = $(BONUS:.c=.o)
@@ -49,4 +52,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all  clean fclean re

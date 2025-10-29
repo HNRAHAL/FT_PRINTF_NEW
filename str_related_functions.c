@@ -1,38 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   percent_case.c                                     :+:      :+:    :+:   */
+/*   str_related_functions.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrahal <hrahal@student.42abudhabi.ae>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/26 12:02:29 by hrahal            #+#    #+#             */
-/*   Updated: 2025/10/26 14:08:55 by hrahal           ###   ########.fr       */
+/*   Created: 2025/09/22 11:25:10 by hrahal            #+#    #+#             */
+/*   Updated: 2025/09/22 15:29:27 by hrahal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_bonus.h"
+#include "ft_printf.h"
 
-int	percent_case(t_format *flg, int w_nbr)
+int	ft_putchar(char c)
 {
+	return (write(1, &c, 1));
+}
+
+int	ft_putstr(char *s)
+{
+	int	i;
 	int	count;
+	int	res;
 
 	count = 0;
-	if (w_nbr == -1)
-		count += b_ft_putchar('%');
-	else
+	res = 0;
+	i = 0;
+	if (!s)
+		s = "(null)";
+	while (s[i])
 	{
-		if (flg->minus_flag)
-		{
-			count += b_ft_putchar('%');
-			while ((--(w_nbr)) > 0)
-				count += b_ft_putchar(' ');
-		}
-		else
-		{
-			while (--(w_nbr) > 0)
-				count += b_ft_putchar(' ');
-			count += b_ft_putchar('%');
-		}
+		res = write(1, &s[i], 1);
+		if (res == -1)
+			return (-1);
+		count += res;
+		i++;
 	}
 	return (count);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	int	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
